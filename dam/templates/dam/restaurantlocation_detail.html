@@ -1,0 +1,43 @@
+{% extends 'dam/restaurantlocation_list.html' %}
+
+{% block content %}
+<section id="why-us" class="why-us">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Why choose <span>Our Restaurant</span></h2>
+      
+        
+        <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="box">
+            <h2><a href="{{ object.get_update_url }}">EDIT </a></h2>
+            {% if  object.pk  is 1 %}
+            <span>{{ object.pk }}st on the list</span>
+            {% elif  object.pk  is 2 %}
+            <span>{{ object.pk }}nd on the list</span>
+            {% elif  object.pk  is 3 %}
+            <span>{{ object.pk }}rd on the list</span>
+            {% else %}
+            <span>{{ object.pk }}th on the list</span>
+            {% endif %}
+            <h4>{{ object.name }}</h4>
+           <span> <p>Location: <i class="fas fa-map-marker-smile"></i>
+            Maps
+            </p> <h3> {{ object.location }} </h3></span>
+            <p> {{ object.category }} </p>
+            <p> {{ object.timestamp }}</p>
+            <p> Updated : {{ object.updated|timesince }}  ago </p>
+            <!-- <img src="{{ object.image.url }}" class=float-left sizes="20" height="20" alt=""> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+{% endblock%}

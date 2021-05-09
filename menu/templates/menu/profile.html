@@ -1,0 +1,58 @@
+{% extends 'dam/restaurantlocation_list.html' %}
+
+{% block content %}
+<form class="form" action="" method="GET">
+<input type="text" placeholder="Search..." name='q' value="{{ request.get.q }}">
+<button class="btn btn-default " type='submit'>Search</button>
+</form>
+
+<h1> {{ user.username }} </h1>
+<hr/>
+{% if locations %}
+{% for rest in user.restaurantlocation_set.all %}      
+<div class="row">
+    <div class="col-lg-4" >
+        <div class="box"></div>
+            <h2> {{ rest.name }}</h2>
+            <p>{{ rest.location }} | {{ rest.category }}              
+            </p>
+            <p>       
+        {% for item in rest.item_set.all %}
+        <ul>
+                    <b>{{ item.name }}<br/>
+                        <h2> include </h2>
+                    {% for items in item.get_contents %}
+                <li style="margin-bottom: 15px;">
+                    <span style="padding: 2px 4px; margin-right: 4px; background-color:papayawhip ; border-radius: 10px;">
+                        {{ items}} 
+                    </span>  
+                    </li>
+                      
+                    {% endfor %}
+                    <h2>excludes</h2>
+                    {% for items in item.get_excludes %}
+                <li style="margin-bottom: 15px;">
+                     
+                    <span style="padding: 2px 4px; margin-right: 4px; background-color:oldlace; border-radius: 10px;">
+                        {{ items}}   </span>
+                </li>               
+                    {% endfor %}                   
+        </ul>
+            </p>
+       </div> 
+
+    </div>
+</div>
+</div>   
+{% endfor %}
+
+{% endfor %}
+{% else %}
+<h3>
+    NO item found
+</h3>
+{% endif %}
+
+
+
+{% endblock %}
