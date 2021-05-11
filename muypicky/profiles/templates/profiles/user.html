@@ -1,0 +1,43 @@
+{% extends 'pro/home.html' %}
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col text-left">
+            <h1>Details of the Restaurant</h1>
+            <h3>{{ user.username}}'s profile</h3>
+            <p>{% include 'profiles/snippet/follow_form.html' with username=user.username %}</p>
+            <form action="" method="GET">
+                <input type="text" placeholder="search.."name='q'>
+                <button class="btn btn-outline" type="submit">search</button>
+            </form>
+    {% if user.item_set.all.exists %}  
+    {% if locations %}      
+        {% for rest in locations %}                            
+            {% for item in rest.item_set.all %}
+            <div class="bg-light my-5 p-3 ">
+
+              <h5>Restaurant: <a href="{{request.path}}?q={{ item.restaurant.name }}">{{item.restaurant.name }}</a></h5>
+                        <h4>included contents</h4>          
+                        {% for ing in item.get_contents %}
+                        <li class="text-left "  style="list-style: none; "><a href="{{ request.path }}?q={{ ing }}">{{ ing }}</a></span>
+                        {% endfor %}
+                        <h4>excluded items </h4>
+                        {% for exc in item.get_contents %}
+                        <li class="text-left" style="list-style: none;">{{ exc }}</li>   
+                        {% endfor %}   
+                </li>
+            {% endfor %} 
+        {% endfor %}
+        </div>
+     {% endif %}       
+    {% else %}
+    <p class="lead">No items found </p>
+    <a href="{% url 'create' %}"><button class="btn btn-success">Add</button></a>
+    {% endif %}      
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col text-center"><a href="{{ object.get_absolute_url }}/edit/"><button class="btn btn-info">Edit</button></a></div>
+    </div>  -->
+</div>
+{% endblock content%}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>muypicky</title>
+  </head>
+  <body>
+    <div class="container">
+
+        <div class="row justify-content-center ">
+            <div class="col-md-2 mx-auto ">
+                <a href="{% url 'homeview' %}"><button class="btn btn-outline">Home</button></a>
+            </div>
+            <div class="col-md-2 mx-auto">
+                <a href="{% url 'aboutview' %}"><button class="btn btn-outline">About</button></a>
+            </div>
+            <div class="col-md-2 mx-auto">
+                <a href="{% url 'contactview' %}"><button class="btn btn-outline">Contact</button></a>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col-md-3 mx-auto">
+                <a href="{% url 'restaurant-list' %}"><button class="btn btn-outline">restaurant</button></a>
+            </div>
+            <div class="col-md-3 mx-auto">
+                <a href="{% url 'menus:list' %}"><button class="btn btn-outline">menulist</button></a>
+            </div>
+           {% endif %}
+        </div>
+        {% block content %}
+
+        <div class="row ">
+            <div class="col-md-8 mx-auto my-5">
+
+                <h1>this is the homepage</h1>
+
+               
+                <p>this is the number:{{ num }}</p>
+                {% for obj in some_list %}
+               <li> {{ obj }} </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'pro/home.html' %}
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <h5>welcome,</h5>{{ user.username }}
+            <h1>Details of the Restaurant</h1>
+            <h3>{{ object.name}}<small> {{object.category }}</small></h3>
+            <p>{{ object.location }} ,updated {{ object.updated|timesince }} ago</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center"><a href="{{ object.get_absolute_url }}/edit/"><button class="btn btn-info">Edit</button></a></div>
+    </div>
+</div>
+{% endblock content%}
